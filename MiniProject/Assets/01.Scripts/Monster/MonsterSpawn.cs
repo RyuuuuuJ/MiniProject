@@ -5,9 +5,9 @@ using UnityEngine;
 public class MonsterSpawn : MonoBehaviour
 {
     [SerializeField] GameObject Slime;
-    [SerializeField] GameObject Goblin;
-    [SerializeField] GameObject Orc;
-    [SerializeField] GameObject Boss;
+    //[SerializeField] GameObject Goblin;
+    //[SerializeField] GameObject Orc;
+    //[SerializeField] GameObject Boss;
 
     //생성할 몬스터 수
     [SerializeField] int Spawncount = 5;
@@ -32,14 +32,14 @@ public class MonsterSpawn : MonoBehaviour
             yield break;
         }
 
-        yield return new WaitForSeconds(spawnInterval);
+        yield return new WaitForSeconds(StartDelay);
 
         for (int i = 0;i<Spawncount;i++)
         {
             ObjectPoolManager.instance.GetObject("Slime", transform.position, Quaternion.identity);
-            ObjectPoolManager.instance.GetObject("Goblin", transform.position, Quaternion.identity);
-            ObjectPoolManager.instance.GetObject("Orc", transform.position, Quaternion.identity);
-            ObjectPoolManager.instance.GetObject("Boss", transform.position, Quaternion.identity);
+            //ObjectPoolManager.instance.GetObject("Goblin", transform.position, Quaternion.identity);
+            //ObjectPoolManager.instance.GetObject("Orc", transform.position, Quaternion.identity);
+            //ObjectPoolManager.instance.GetObject("Boss", transform.position, Quaternion.identity);
 
             if (i<Spawncount-1)
             {

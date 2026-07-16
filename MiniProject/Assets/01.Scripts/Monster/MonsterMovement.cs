@@ -16,6 +16,8 @@ public class MonsterMovement : MonoBehaviour
 
     bool canMove;
 
+    [SerializeField] private int damage = 10;
+
     private void Awake()
     {
         FindWayPoints();
@@ -111,6 +113,15 @@ public class MonsterMovement : MonoBehaviour
     void ReachBase()
     {
         Debug.Log($"{gameObject.name}이 기지에 도착했습니다.");
+
+        if(BaseHP.instance != null)
+        {
+            BaseHP.instance.TakeDamage(damage);
+        }
+        else
+        {
+            Debug.LogError("BaseHP를 찾을 수 없습니다.");
+        }
 
         //pool에 반환
         if (ObjectPoolManager.instance != null)

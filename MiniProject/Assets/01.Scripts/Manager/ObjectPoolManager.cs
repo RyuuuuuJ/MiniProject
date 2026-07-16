@@ -114,4 +114,12 @@ public class ObjectPoolManager : MonoBehaviour
 
         pools[key].Enqueue(go);
     }
+
+    private void OnDestroy()
+    {
+        if(instance == this)
+        {
+            instance = null;
+        }
+    }
 }
