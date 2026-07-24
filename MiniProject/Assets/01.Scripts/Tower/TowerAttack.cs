@@ -2,8 +2,17 @@ using System.Net;
 using System.Threading;
 using UnityEngine;
 
+//타워가 공격할 상대와 시간을 결정
+//공격 범위 관리
+//범위 안의 몬스터 탐색
+//가장 가까운 몬스터 선택
+//공격 간격 계산
+//공격할 시간이 되면 Attack() 호출
 public abstract class TowerAttack : MonoBehaviour
 {
+    // 한 번에 탐색할 수 있는 최대 Collider 수
+    private const int DetectionBufferSize = 32;
+
     [SerializeField] float attackRange = 3f;
     [SerializeField] float attackInterval = 1f;
     [SerializeField] protected int attackDamage = 10;
@@ -12,7 +21,21 @@ public abstract class TowerAttack : MonoBehaviour
     //공격 간격
     private float attackTimer;
 
+    private readonly Collider2D[] detectionBuffer = new Collider2D[DetectionBufferSize];
+
+    private ContactFilter2D enemyFilter;
+
+    protected LayerMask EnemyLayer => enemyLayer;
+
+    protected ContactFilter2D EnemyFilter => enemyFilter;
     protected MonsterHp CurrentTarget { get; private set; }
+    protected virtual void Awake()
+    {
+        enemyFilter = new ContactFilter2D();
+
+        enemyFilter.SetLayerMask(enemyLayer);
+        enemyFilter.useTriggers = true;
+    }
 
     protected virtual void OnEnable()
     {
@@ -23,8 +46,7 @@ public abstract class TowerAttack : MonoBehaviour
     protected virtual void Update()
     {
         // 게임이 Playing 상태가 아닐 때만 공격을 중지합니다.
-        if (GameManager.instance != null &&
-            !GameManager.instance.IsPlaying)
+        if (GameManager.instance != null && !GameManager.instance.IsPlaying)
         {
             return;
         }
@@ -55,28 +77,33 @@ public abstract class TowerAttack : MonoBehaviour
 
     private MonsterHp FindClosestTarget()
     {
-        Collider2D[] detectedEnemy = Physics2D.OverlapCircleAll(transform.position,attackRange,enemyLayer);
+        int detectedCount = Physics2D.OverlapCircle(transform.position,attackRange,enemyFilter,detectionBuffer);
 
         MonsterHp closestMonster = null;
 
         float closestSqrDistance = float.MaxValue;
 
-        foreach (Collider2D detectedCollider in detectedEnemy)
+        for (int i = 0; i < detectedCount; i++)
         {
-            MonsterHp monster = detectedCollider.GetComponentInParent<MonsterHp>();
+            Collider2D detectedCollider = detectionBuffer[i];
 
-
-            if (monster == null || monster.isDead)
+            if (detectedCollider == null)
             {
                 continue;
             }
 
-            Vector3 direction =
-                    monster.transform.position - transform.position;
+            MonsterHp monster =
+                detectedCollider.GetComponentInParent<MonsterHp>();
+
+            if (monster == null || monster.isDead || !monster.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+
+            Vector3 direction =monster.transform.position - transform.position;
 
             float sqrDistance = direction.sqrMagnitude;
 
-            // 지금까지 찾은 몬스터보다 가까우면 타깃을 교체합니다.
             if (sqrDistance < closestSqrDistance)
             {
                 closestSqrDistance = sqrDistance;

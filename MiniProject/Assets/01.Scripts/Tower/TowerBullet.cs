@@ -1,9 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
+
+
+//생성된 총알이 이동하고 피해 적용
+//전달받은 몬스터를 추적
+//몬스터 방향으로 이동
+//몬스터에게 도착하면 피해 적용
+//명중 이미지 표시
+//사용이 끝나면 ObjectPool로 반환
 public class TowerBullet : MonoBehaviour
 {
     private MonsterHp target;
+
     private int damage;
     private float speed;
     private bool isInitialized;
@@ -11,9 +20,11 @@ public class TowerBullet : MonoBehaviour
     [SerializeField] Sprite hitSprite;
     [SerializeField] float hitEffectDuration;
     [SerializeField] float hitScale;
+    [SerializeField] private BulletHitEffect hitEffect;
 
     private SpriteRenderer spriteRenderer;
-    private Animator animator;
+
+    private Sprite originalSprite;
     private Vector3 originalScale;
     private Color originalColor;
 
@@ -22,17 +33,23 @@ public class TowerBullet : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
 
         originalScale = transform.localScale;
 
         if(spriteRenderer != null )
         {
+            originalSprite = spriteRenderer.sprite;
             originalColor = spriteRenderer.color;
+        }
+        if (hitEffect == null)
+        {
+            TryGetComponent(out hitEffect);
         }
     }
     private void OnEnable()
     {
+        StopAllCoroutines();
+
         //정보 초기화
         target = null;
         damage = 0;
@@ -45,12 +62,8 @@ public class TowerBullet : MonoBehaviour
 
         if(spriteRenderer != null )
         {
+            spriteRenderer.sprite = originalSprite;
             spriteRenderer.color = originalColor;
-        }
-
-        if(animator != null )
-        {
-            animator.enabled = true;
         }
     }
 
@@ -72,7 +85,7 @@ public class TowerBullet : MonoBehaviour
         }
 
         //공격 중 적이 죽거나 사라지면 풀로 반환
-        if (target == null || target.isDead)
+        if (target == null || target.isDead || !target.gameObject.activeInHierarchy)
         {
             ReturnToPool();
             return; 
@@ -122,22 +135,26 @@ public class TowerBullet : MonoBehaviour
         isHitting = true;
         isInitialized = false;
 
-        if(target != null && !target.isDead)
+        if(target != null && !target.isDead && target.gameObject.activeInHierarchy)
         {
-            target.TakeDamage(damage);
+            ApplyHit(target);
         }
         target = null;
 
         StartCoroutine(PlayHitEffect());
     }
+    private void ApplyHit(MonsterHp hitTarget)
+    {
+        hitTarget.TakeDamage(damage);
 
+        // 피해로 몬스터가 죽지 않았다면 추가 효과 실행
+        if (hitEffect != null && !hitTarget.isDead && hitTarget.gameObject.activeInHierarchy)
+        {
+            hitEffect.Apply(hitTarget);
+        }
+    }
     private IEnumerator PlayHitEffect()
     {
-        if (animator != null)
-        {
-            animator.enabled = false;
-        }
-
         // 명중 순간 표시할 스프라이트로 변경
         if (spriteRenderer != null && hitSprite != null)
         {
@@ -177,6 +194,7 @@ public class TowerBullet : MonoBehaviour
     private void ReturnToPool()
     {
         isInitialized = false;
+        isHitting = false;
         target = null;
 
         if (ObjectPoolManager.instance != null)

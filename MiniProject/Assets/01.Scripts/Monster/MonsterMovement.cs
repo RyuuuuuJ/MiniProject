@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class MonsterMovement : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class MonsterMovement : MonoBehaviour
 
     [SerializeField] private int damage = 10;
 
+    private float speedMultiplier = 1f;
+   
+    public event Action OnReachedBase;
+
     private void Awake()
     {
         FindWayPoints();
@@ -25,6 +30,7 @@ public class MonsterMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        speedMultiplier = 1f;
 
         if (wayPoints == null || wayPoints.Length < 2)
         {
@@ -55,6 +61,8 @@ public class MonsterMovement : MonoBehaviour
 
         MoveToNextWaypoint();
     }
+
+    //웨이 포인트 찾기
     void FindWayPoints()
     {
         GameObject waypointRoot = GameObject.Find("Waypoints");
@@ -81,6 +89,7 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
+    //웨이 포인트로 몬스터 이동
     void MoveToNextWaypoint()
     {
         if (currentWaypointIndex >= wayPoints.Length)
@@ -91,7 +100,7 @@ public class MonsterMovement : MonoBehaviour
         Transform targetWaypoint = wayPoints[currentWaypointIndex];
 
         //현재 위치에서 목표 위치로 이동
-        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * speedMultiplier * Time.deltaTime);
 
         //현재 위치와 목표의 거리 구하기
         float distanceToTarget = Vector3.Distance(transform.position, targetWaypoint.position);
@@ -110,7 +119,8 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
-    void ReachBase()
+    //기지 도착
+     void ReachBase()
     {
         Debug.Log($"{gameObject.name}이 기지에 도착했습니다.");
 
@@ -122,6 +132,9 @@ public class MonsterMovement : MonoBehaviour
         {
             Debug.LogError("BaseHP를 찾을 수 없습니다.");
         }
+
+        //waveManager에 몬스터가 기지에 도착 했다고 알림
+        OnReachedBase?.Invoke();
 
         //pool에 반환
         if (ObjectPoolManager.instance != null)
@@ -135,5 +148,14 @@ public class MonsterMovement : MonoBehaviour
         }
     }
 
-   
+    // 상태이상 걸렷을시
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = Mathf.Clamp(multiplier, 0.1f, 1f);
+    }
+    //이동 속도 배율 원래상태로 복구
+    public void ResetSpeedMultiplier()
+    {
+        speedMultiplier = 1f;
+    }
 }

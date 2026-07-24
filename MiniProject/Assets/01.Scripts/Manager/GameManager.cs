@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using static GameManager;
 
 public class GameManager : MonoBehaviour
@@ -14,8 +15,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public gameState CurrentState { get; private set; }
-
+    public event Action<gameState> OnGameStateChanged;
     public bool IsPlaying => CurrentState == gameState.Playing;
+
 
     private void Awake()
     {
@@ -36,6 +38,19 @@ public class GameManager : MonoBehaviour
         CurrentState = gameState.Playing;
     }
 
+    private void SetState(gameState newState)
+    {
+        if (CurrentState == newState)
+        {
+            return;
+        }
+
+        CurrentState = newState;
+
+        OnGameStateChanged?.Invoke(CurrentState);
+    }
+
+
     //게임 오버
     public void GameOver()
     {
@@ -44,7 +59,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        CurrentState = gameState.GameOver;
+        SetState(gameState.GameOver);
 
         Debug.Log("Game Over");
         Time.timeScale = 0f;
@@ -58,7 +73,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        CurrentState =gameState.Paused;
+        SetState(gameState.Paused);
 
         Time.timeScale = 0f;
     }
@@ -71,8 +86,24 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        CurrentState = gameState.Playing;
+        SetState(gameState.Playing);
         Time.timeScale = 1f;
+    }
+
+    // 게임 승리
+    public void Victory()
+    {       
+        if (CurrentState == gameState.Victory || CurrentState == gameState.GameOver)
+        {
+            return;
+        }
+
+        SetState(gameState.Victory);
+
+        Debug.Log("Victory");
+
+        //승리 화면 나올때 시간 정지
+        Time.timeScale = 0f;
     }
 
     private void OnDestroy()

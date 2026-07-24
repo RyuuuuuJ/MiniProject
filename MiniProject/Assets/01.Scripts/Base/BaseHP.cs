@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+
+
+//±âÁö HP
 public class BaseHP : MonoBehaviour
 {
     public static BaseHP instance;
@@ -51,7 +54,7 @@ public class BaseHP : MonoBehaviour
         OnHpChanged?.Invoke(currentHP, maxHP);
 
         Debug.Log(
-            $"Base HP: {currentHP}/{maxHP}"
+            $"Base : {currentHP}/{maxHP}"
         );
 
         if (currentHP <= 0)

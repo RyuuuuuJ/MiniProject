@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5534979370521009282}
   - component: {fileID: 6544372976099277914}
-  - component: {fileID: 1990045178242855286}
   - component: {fileID: 610897279844305007}
   m_Layer: 0
   m_Name: FireBullet
@@ -83,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 4ab7bba93f17f18458fe9092df59b5cf, type: 3}
+  m_Sprite: {fileID: -830563336262122690, guid: 36e8a648f68e3424fa12d25a20297232, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,28 +92,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!95 &1990045178242855286
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7951374291449633085}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ef1ef5510f730f4c8222666ef6fe267, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &610897279844305007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f327ef717c828c94db03aa797ba5930a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerBullet
-  hitSprite: {fileID: 21300000, guid: 4ab7bba93f17f18458fe9092df59b5cf, type: 3}
+  hitSprite: {fileID: -689575081175923454, guid: 528ea63f2083ed84bb20f913022fe7b9, type: 3}
   hitEffectDuration: 0.15
   hitScale: 1.8

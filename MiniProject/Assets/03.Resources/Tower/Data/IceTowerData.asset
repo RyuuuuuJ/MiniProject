@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dec1c50543efbb4692ee4b97a1492ea, type: 3}
+  m_Name: IceTowerData
+  m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  towerName: IceTower
+  towerIcon: {fileID: 21300000, guid: 390f357948f219648841c77208725650, type: 3}
+  towerPrefab: {fileID: 1802535633831089213, guid: 07fae2d5da5565546b835c4323d92a45, type: 3}
+  buildCost: 150

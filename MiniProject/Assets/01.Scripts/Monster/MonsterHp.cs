@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 
+
+//몬스터 HP
 public class MonsterHp : MonoBehaviour
 {
     [SerializeField] int maxHp;
@@ -7,6 +10,17 @@ public class MonsterHp : MonoBehaviour
     public int currentHp {  get; private set; }
 
     public bool isDead { get; private set; }
+
+    public MonsterStatus statusEffect { get; private set; }
+
+    public event Action onDie;
+
+    private void Awake()
+    {
+        TryGetComponent(out MonsterStatus status);
+
+        statusEffect = status;
+    }
 
     private void OnEnable()
     {
@@ -43,6 +57,7 @@ public class MonsterHp : MonoBehaviour
 
     }
 
+    //사망처리
     private void Die()
     {
         if (isDead)
@@ -50,6 +65,8 @@ public class MonsterHp : MonoBehaviour
             return;
         }
         isDead = true;
+
+        onDie?.Invoke();
 
         if(ObjectPoolManager.instance != null)
         {
