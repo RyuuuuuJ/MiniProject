@@ -5,9 +5,9 @@ using UnityEngine;
 {
     [SerializeField]private GameObject monsterPrefab;
 
-    [SerializeField, Min(1)]private int spawnCount = 5;
+    [SerializeField]private int spawnCount = 5;
 
-    [SerializeField, Min(0.05f)]private float spawnInterval = 1f;
+    [SerializeField]private float spawnInterval = 1f;
 
     public GameObject MonsterPrefab => monsterPrefab;
 

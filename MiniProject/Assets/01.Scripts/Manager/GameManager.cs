@@ -18,6 +18,15 @@ public class GameManager : MonoBehaviour
     public event Action<gameState> OnGameStateChanged;
     public bool IsPlaying => CurrentState == gameState.Playing;
 
+    // 일반 속도와 2배속 값
+    private const float NormalSpeed = 1f;
+    private const float FastSpeed = 2f;
+
+    private float currentPlaySpeed = NormalSpeed;
+
+    public float CurrentPlaySpeed => currentPlaySpeed;
+
+    public bool IsFastSpeed => Mathf.Approximately(currentPlaySpeed, FastSpeed);
 
     private void Awake()
     {
@@ -32,6 +41,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        currentPlaySpeed = NormalSpeed;
+        Time.timeScale = currentPlaySpeed;
 
         Time.timeScale = 1f;
 
@@ -61,12 +73,36 @@ public class GameManager : MonoBehaviour
 
         SetState(gameState.GameOver);
 
-        Debug.Log("Game Over");
+        if (PlaySound.instance != null)
+        {
+            PlaySound.instance.StopGameBGM();
+            PlaySound.instance.PlayGameOver();
+        }
+
+
         Time.timeScale = 0f;
     }
 
+    //일시정지 버튼 클릭
+    public void TogglePause()
+    {
+        if (CurrentState == gameState.Victory || CurrentState == gameState.GameOver)
+        {
+            return;
+        }
+
+        if (CurrentState == gameState.Paused)
+        {
+            ResumeGame();
+        }
+        else if (CurrentState == gameState.Playing)
+        {
+            PauseGame();
+        }
+    }
+
     //일시정지
-    public void PuaseGame()
+    public void PauseGame()
     {
         if(CurrentState != gameState.Playing)
         {
@@ -87,7 +123,20 @@ public class GameManager : MonoBehaviour
         }
 
         SetState(gameState.Playing);
-        Time.timeScale = 1f;
+        Time.timeScale = currentPlaySpeed;
+    }
+
+    //배속 전환
+    public void ToggleGameSpeed()
+    {
+        if (CurrentState != gameState.Playing)
+        {
+            return;
+        }
+
+        currentPlaySpeed = IsFastSpeed? NormalSpeed: FastSpeed;
+
+        Time.timeScale = currentPlaySpeed;
     }
 
     // 게임 승리
@@ -100,7 +149,12 @@ public class GameManager : MonoBehaviour
 
         SetState(gameState.Victory);
 
-        Debug.Log("Victory");
+        if (PlaySound.instance != null)
+        {
+            PlaySound.instance.StopGameBGM();
+            PlaySound.instance.PlayVictory();
+        }
+
 
         //승리 화면 나올때 시간 정지
         Time.timeScale = 0f;
@@ -108,9 +162,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (instance == null)
-        { 
-            instance = this;
+        if (instance == this)
+        {
+            instance = null;
         }
     }
 }

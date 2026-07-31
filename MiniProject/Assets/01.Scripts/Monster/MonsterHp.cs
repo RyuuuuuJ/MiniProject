@@ -15,6 +15,9 @@ public class MonsterHp : MonoBehaviour
 
     public event Action onDie;
 
+    public event Action<int, int> OnHpChanged;
+    public int MaxHp => maxHp;
+
     private void Awake()
     {
         TryGetComponent(out MonsterStatus status);
@@ -26,6 +29,8 @@ public class MonsterHp : MonoBehaviour
     {
         currentHp = maxHp;
         isDead = false;
+
+        OnHpChanged?.Invoke(currentHp, maxHp);
     }
 
     public void TakeDamage(int dmg)
@@ -45,14 +50,26 @@ public class MonsterHp : MonoBehaviour
 
         currentHp = Mathf.Max(currentHp - dmg, 0);
 
-        Debug.Log(
-            $"{gameObject.name} HP: {currentHp}/{maxHp}"
-        );
+        OnHpChanged?.Invoke(currentHp, maxHp);
 
         //체력 없을시 사망 처리
         if (currentHp <= 0)
         {
+
+            if (PlaySound.instance != null)
+            {
+                PlaySound.instance.PlayMonsterDeath();
+            }
+
             Die();
+        }
+
+        else
+        {
+            if (PlaySound.instance != null)
+            {
+                PlaySound.instance.PlayMonsterHit();
+            }
         }
 
     }

@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380506272603989572}
-  - component: {fileID: 2823552703633266145}
   - component: {fileID: 8001484253775065465}
+  - component: {fileID: 2823552703633266145}
   - component: {fileID: -8268654362235251216}
-  - component: {fileID: -3063821700302028718}
   - component: {fileID: -9164171408029607452}
   - component: {fileID: -8660704480780737653}
   - component: {fileID: -1729529534976386287}
+  - component: {fileID: 6638899484827946581}
+  - component: {fileID: 7931866525229558920}
   m_Layer: 6
   m_Name: Goblin
   m_TagString: Untagged
@@ -37,23 +38,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6098247267174269315}
+  - {fileID: 7856154019087549919}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2823552703633266145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5764063755108350530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf8ebd567de28448b82d367edf41d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterMovement
-  moveSpeed: 13
-  arrivalDistance: 0.05
-  damage: 10
 --- !u!61 &8001484253775065465
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -100,6 +87,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &2823552703633266145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5764063755108350530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf8ebd567de28448b82d367edf41d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterMovement
+  moveSpeed: 13
+  arrivalDistance: 0.05
+  damage: 10
 --- !u!114 &-8268654362235251216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,21 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHp
   maxHp: 15
---- !u!114 &-3063821700302028718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5764063755108350530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf8ebd567de28448b82d367edf41d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterMovement
-  moveSpeed: 2
-  arrivalDistance: 0.05
-  damage: 10
 --- !u!114 &-9164171408029607452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547263ca8cdc3924889a8cbef8170e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDie
-  getGold: 10
+  getGold: 8
 --- !u!114 &-8660704480780737653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +153,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078e90add869eba4ea3516ac133a5115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveMonsterTracker
+--- !u!114 &6638899484827946581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5764063755108350530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b866e76e148bb945996ab3d13e385cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterAnim
+  monsterRenderer: {fileID: 0}
+  spriteFacesRight: 1
+  minimumMoveDistance: 0.001
+--- !u!114 &7931866525229558920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5764063755108350530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7397500e749f9d9438ff0ff86f35fb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDeathEffectSpawner
+  effectPoolKey: MonsterDieEffect
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8657542058257768691
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6098247267174269315}
   - component: {fileID: 3944451664890961215}
+  - component: {fileID: 5244700142417980150}
   m_Layer: 6
   m_Name: Goblin_Run_01
   m_TagString: Untagged
@@ -257,3 +274,131 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &5244700142417980150
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657542058257768691}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 58c291e107357784b8364830470fd526, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &7105967527220260161
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1380506272603989572}
+    m_Modifications:
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316985346587235523, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_Name
+      value: Monster Hp Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291100367612717993, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+--- !u!224 &7856154019087549919 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1124736236139063454, guid: 19f7592e7122ae54cbb79d681910d2dd, type: 3}
+  m_PrefabInstance: {fileID: 7105967527220260161}
+  m_PrefabAsset: {fileID: 0}

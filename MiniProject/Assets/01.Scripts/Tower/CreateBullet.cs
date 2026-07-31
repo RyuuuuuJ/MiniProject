@@ -7,14 +7,11 @@ using UnityEngine;
 //공용 기본 공격
 public class CreateBullet : TowerAttack
 {
-    [SerializeField]
-    private string bulletKey;
+    [SerializeField] private string bulletKey;
 
-    [SerializeField]
-    private float bulletSpeed = 5f;
+    [SerializeField] private float bulletSpeed = 5f;
 
-    [SerializeField]
-    private Transform firePoint;
+    [SerializeField] private Transform firePoint;
 
     protected override void Attack(MonsterHp target)
     {
@@ -44,9 +41,5 @@ public class CreateBullet : TowerAttack
         }
 
         towerBullet.Initialize(target, attackDamage, bulletSpeed);
-
-        Debug.Log(
-             $"{gameObject.name}이 {target.gameObject.name}을 공격했습니다. " + $"Damage: {attackDamage}"
-         );
     }
 }

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnEntries:
   - monsterPrefab: {fileID: 750697775153375737, guid: fd41f6ba01599a942bb568b76770465f, type: 3}
+    spawnCount: 10
+    spawnInterval: 0.3
+  - monsterPrefab: {fileID: 5764063755108350530, guid: d9107f77de9b74b41989f296fba48814, type: 3}
+    spawnCount: 10
+    spawnInterval: 0.4
+  - monsterPrefab: {fileID: 9161202258074818546, guid: e5ca6bd8a5030354283cceac1721d570, type: 3}
     spawnCount: 5
     spawnInterval: 1
-  - monsterPrefab: {fileID: 5764063755108350530, guid: d9107f77de9b74b41989f296fba48814, type: 3}
-    spawnCount: 5
-    spawnInterval: 1.5
-  clearGoldReward: 50
+  clearGoldReward: 125

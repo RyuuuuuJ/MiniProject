@@ -1,0 +1,410 @@
+fileFormatVersion: 2
+guid: d5ddaf03ad7469c48a43b5fba60127ef
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1345448552468020465
+    second: MonsterDeathEffect_SpriteSheet_0
+  - first:
+      213: 3196363212175447816
+    second: MonsterDeathEffect_SpriteSheet_1
+  - first:
+      213: 3650579875181094232
+    second: MonsterDeathEffect_SpriteSheet_2
+  - first:
+      213: -8156523921408963754
+    second: MonsterDeathEffect_SpriteSheet_3
+  - first:
+      213: 4515029106769471624
+    second: MonsterDeathEffect_SpriteSheet_4
+  - first:
+      213: 6770439942226516892
+    second: MonsterDeathEffect_SpriteSheet_5
+  - first:
+      213: -6794895082974219163
+    second: MonsterDeathEffect_SpriteSheet_6
+  - first:
+      213: 6232806940271757783
+    second: MonsterDeathEffect_SpriteSheet_7
+  - first:
+      213: 3357755849259885520
+    second: MonsterDeathEffect_SpriteSheet_8
+  - first:
+      213: -7816915267111398308
+    second: MonsterDeathEffect_SpriteSheet_9
+  - first:
+      213: -7228213504631759315
+    second: MonsterDeathEffect_SpriteSheet_10
+  - first:
+      213: 2617505814808471666
+    second: MonsterDeathEffect_SpriteSheet_11
+  - first:
+      213: 6385973476690838896
+    second: MonsterDeathEffect_SpriteSheet_12
+  - first:
+      213: 696394097580571502
+    second: MonsterDeathEffect_SpriteSheet_13
+  - first:
+      213: -5917757929596796057
+    second: MonsterDeathEffect_SpriteSheet_14
+  - first:
+      213: 53332339130664783
+    second: MonsterDeathEffect_SpriteSheet_15
+  - first:
+      213: -14006566143552751
+    second: MonsterDeathEffect_SpriteSheet_16
+  - first:
+      213: 8469891126471779853
+    second: MonsterDeathEffect_SpriteSheet_17
+  - first:
+      213: -4133646114861862905
+    second: MonsterDeathEffect_SpriteSheet_18
+  - first:
+      213: 4411793370201130836
+    second: MonsterDeathEffect_SpriteSheet_19
+  - first:
+      213: -8108580535220645686
+    second: MonsterDeathEffect_SpriteSheet_20
+  - first:
+      213: -2935873916107136152
+    second: MonsterDeathEffect_SpriteSheet_21
+  - first:
+      213: 789219634700877602
+    second: MonsterDeathEffect_SpriteSheet_22
+  - first:
+      213: -3954126988120632085
+    second: MonsterDeathEffect_SpriteSheet_23
+  - first:
+      213: 5960254054626547674
+    second: MonsterDeathEffect_SpriteSheet_24
+  - first:
+      213: -7379018530441746170
+    second: MonsterDeathEffect_SpriteSheet_25
+  - first:
+      213: -8002175059305437660
+    second: MonsterDeathEffect_SpriteSheet_26
+  - first:
+      213: 6026232395442884907
+    second: MonsterDeathEffect_SpriteSheet_27
+  - first:
+      213: 3983655859907043630
+    second: MonsterDeathEffect_SpriteSheet_28
+  - first:
+      213: -180803637250583637
+    second: MonsterDeathEffect_SpriteSheet_29
+  - first:
+      213: 6286570975995443916
+    second: MonsterDeathEffect_SpriteSheet_30
+  - first:
+      213: 3761968855958046792
+    second: MonsterDeathEffect_SpriteSheet_31
+  - first:
+      213: -4102588227533699443
+    second: MonsterDeathEffect_SpriteSheet_32
+  - first:
+      213: -3168555097021180178
+    second: MonsterDeathEffect_SpriteSheet_33
+  - first:
+      213: 1088519053374872485
+    second: MonsterDeathEffect_SpriteSheet_34
+  - first:
+      213: -1403560808027881064
+    second: MonsterDeathEffect_SpriteSheet_35
+  - first:
+      213: -5982468392413393173
+    second: MonsterDeathEffect_SpriteSheet_36
+  - first:
+      213: 1080460488541416499
+    second: MonsterDeathEffect_SpriteSheet_37
+  - first:
+      213: 7993822671194636287
+    second: MonsterDeathEffect_SpriteSheet_38
+  - first:
+      213: -8923479580893602997
+    second: MonsterDeathEffect_SpriteSheet_39
+  - first:
+      213: 50700351492564432
+    second: MonsterDeathEffect_SpriteSheet_40
+  - first:
+      213: -5525087159634169764
+    second: MonsterDeathEffect_SpriteSheet_41
+  - first:
+      213: 790967161709499848
+    second: MonsterDeathEffect_SpriteSheet_42
+  - first:
+      213: 616963352137706068
+    second: MonsterDeathEffect_SpriteSheet_43
+  - first:
+      213: -6126858896636912775
+    second: MonsterDeathEffect_SpriteSheet_44
+  - first:
+      213: 1147822390952790000
+    second: MonsterDeathEffect_SpriteSheet_45
+  - first:
+      213: -2646891758475159821
+    second: MonsterDeathEffect_SpriteSheet_46
+  - first:
+      213: -2957777067077845874
+    second: MonsterDeathEffect_SpriteSheet_47
+  - first:
+      213: 1973555768815925968
+    second: MonsterDeathEffect_SpriteSheet_48
+  - first:
+      213: -8119196798286867632
+    second: MonsterDeathEffect_SpriteSheet_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MonsterDeathEffect_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0384968ba1045de0800000000000000
+      internalID: -1345448552468020465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonsterDeathEffect_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80718da0863cb5c20800000000000000
+      internalID: 3196363212175447816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonsterDeathEffect_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 855eb5c0e0779a230800000000000000
+      internalID: 3650579875181094232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonsterDeathEffect_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65b417665b43ece80800000000000000
+      internalID: -8156523921408963754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonsterDeathEffect_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8882b8b0d0b98ae30800000000000000
+      internalID: 4515029106769471624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d6c99135b69405541a7582e7fef6fe9e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      MonsterDeathEffect_SpriteSheet_0: -1345448552468020465
+      MonsterDeathEffect_SpriteSheet_1: 3196363212175447816
+      MonsterDeathEffect_SpriteSheet_2: 3650579875181094232
+      MonsterDeathEffect_SpriteSheet_3: -8156523921408963754
+      MonsterDeathEffect_SpriteSheet_4: 4515029106769471624
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

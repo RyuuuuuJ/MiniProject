@@ -13,6 +13,22 @@ MonoBehaviour:
   m_Name: FireTowerData
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: FireTower
-  towerIcon: {fileID: 21300000, guid: a057047b4f0c43e4a92844221c8733d2, type: 3}
+  towerIcon: {fileID: -5718406870525638669, guid: a057047b4f0c43e4a92844221c8733d2, type: 3}
   towerPrefab: {fileID: 2071264660395269167, guid: 09ce0a24777e0da48a1b219f4cac6c9e, type: 3}
   buildCost: 150
+  levelData:
+  - upgradeCost: 0
+    attackDamage: 10
+    attackInterval: 1
+    attackRange: 3
+    towerSprite: {fileID: -5718406870525638669, guid: a057047b4f0c43e4a92844221c8733d2, type: 3}
+  - upgradeCost: 200
+    attackDamage: 15
+    attackInterval: 0.85
+    attackRange: 3.2
+    towerSprite: {fileID: 4272364369451794867, guid: 09f78616f7099f14a88a029324f1cd0f, type: 3}
+  - upgradeCost: 300
+    attackDamage: 20
+    attackInterval: 0.7
+    attackRange: 3.5
+    towerSprite: {fileID: 3669946269684517261, guid: 6f6ec2cb3bfb5b34a8383d50bbb6fb2f, type: 3}

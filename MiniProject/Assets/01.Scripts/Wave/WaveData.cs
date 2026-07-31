@@ -3,11 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Wave_01",menuName = "Tower Defence/Wave Data")]
 public class WaveData : ScriptableObject
 {
-    [SerializeField]
-    private WaveSpwanStart[] spawnEntries;
+    [SerializeField] private WaveSpwanStart[] spawnEntries;
 
-    [SerializeField, Min(0)]
-    private int clearGoldReward = 50;
+    [SerializeField, Min(0)] private int clearGoldReward = 50;
 
     public WaveSpwanStart[] SpawnEntries => spawnEntries;
     public int ClearGoldReward => clearGoldReward;

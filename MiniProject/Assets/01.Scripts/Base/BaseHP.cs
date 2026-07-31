@@ -42,9 +42,7 @@ public class BaseHP : MonoBehaviour
         }
         if (dmg <= 0)
         {
-            Debug.LogWarning(
-                $"기지에 잘못된 피해 값이 전달되었습니다: {dmg}"
-            );
+            Debug.LogWarning(  $"기지에 잘못된 피해 값이 전달되었습니다: {dmg}");
 
             return;
         }
@@ -52,10 +50,6 @@ public class BaseHP : MonoBehaviour
         currentHP = Mathf.Max(currentHP - dmg , 0);
 
         OnHpChanged?.Invoke(currentHP, maxHP);
-
-        Debug.Log(
-            $"Base : {currentHP}/{maxHP}"
-        );
 
         if (currentHP <= 0)
         {
@@ -66,7 +60,7 @@ public class BaseHP : MonoBehaviour
     private void DestroyBase()
     {
         isDestroy = true;
-        Debug.Log("기지가 파괴 되었습니다");
+
 
         if(GameManager.instance != null)
         {

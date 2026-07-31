@@ -4,11 +4,9 @@ using System;
 public class MonsterMovement : MonoBehaviour
 {
 
-    [SerializeField]
-    private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 2f;
 
-    [SerializeField]
-    private float arrivalDistance = 0.05f;
+    [SerializeField] private float arrivalDistance = 0.05f;
 
     private Transform[] wayPoints;
 
@@ -122,7 +120,6 @@ public class MonsterMovement : MonoBehaviour
     //기지 도착
      void ReachBase()
     {
-        Debug.Log($"{gameObject.name}이 기지에 도착했습니다.");
 
         if(BaseHP.instance != null)
         {

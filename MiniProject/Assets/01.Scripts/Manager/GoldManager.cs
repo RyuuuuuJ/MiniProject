@@ -6,7 +6,7 @@ public class GoldManager : MonoBehaviour
     public static GoldManager instance {  get; private set; }
 
     // 게임 시작 시 지급되는 골드
-    [SerializeField] private int startingGold = 500;
+    [SerializeField] private int startingGold;
 
     public int CurrentGold { get; private set; }
 
@@ -36,7 +36,6 @@ public class GoldManager : MonoBehaviour
         CurrentGold += amount;
         OnGoldChanged?.Invoke(CurrentGold);
 
-        Debug.Log($"골드 + {amount} /현재 골드 : {CurrentGold}");
     }
 
     public bool SpendGold(int amount)
@@ -48,7 +47,7 @@ public class GoldManager : MonoBehaviour
 
         if(CurrentGold < amount)
         {
-            Debug.Log("골드 부족");
+
             return false;
         }
 

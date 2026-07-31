@@ -11,11 +11,10 @@ public class BuildTileSelector : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap roadTilemap;
+    [SerializeField] private Tilemap buildableTilemap;
     // 두 타워 중심 사이에 확보해야 하는 최소 거리
-    [SerializeField, Min(0.1f)] private float minimumTowerDistance = 2.6f;
+    [SerializeField] private float minimumTowerDistance = 2.6f;
 
-    // 기존 타워와 높이가 비슷하면 같은 줄로 정렬하는 범위
-    [SerializeField, Min(0f)] private float rowSnapTolerance = 0.35f;
     //선택 표시
     [SerializeField] private GameObject selectionMarker;
 
@@ -23,6 +22,10 @@ public class BuildTileSelector : MonoBehaviour
 
     [SerializeField]
     private Vector2 blockerCheckSize = new Vector2(1.8f, 1.8f);
+
+    [SerializeField] private float horizontalBuildSpacing = 2.6f;
+
+    [SerializeField]private LayerMask towerLayer;
 
     private readonly Dictionary<Vector3Int, GameObject> placedTowers = new Dictionary<Vector3Int, GameObject>();
 
@@ -35,8 +38,6 @@ public class BuildTileSelector : MonoBehaviour
     public event Action OnSelectionCanceled;
 
     public Vector3 SelectedWorldPosition { get; private set; }
-
-    [SerializeField] private float buildSnapSize = 0.25f;
 
     private void Awake()
     {        
@@ -92,57 +93,75 @@ public class BuildTileSelector : MonoBehaviour
 
         Vector2 screenPosition = Mouse.current.position.ReadValue();
 
+        if (mainCamera != null && towerLayer.value != 0)
+        {
+            Vector2 worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+
+            Collider2D clickedTower = Physics2D.OverlapPoint(worldPosition, towerLayer);
+
+            if (clickedTower != null)
+            {
+
+                CancelSelection();
+                return;
+            }
+        }
+
         SelectCell(screenPosition);
     }
 
     /// 마우스 화면 좌표를 타일 셀 좌표로 변환
     private void SelectCell(Vector2 screenPosition)
     {
-        if (mainCamera == null ||groundTilemap == null || roadTilemap == null)
+        if (mainCamera == null || buildableTilemap == null)
         {
-            Debug.LogError(
-                "BuildTileSelector의 Camera 또는 Tilemap이 연결되지 않았습니다."
-            );
+            Debug.LogError( "BuildTileSelector의 Camera 또는 BuildableTilemap이 연결되지 않았습니다." );
 
             return;
         }
 
-        // 카메라부터 Tilemap까지의 Z 거리
-        float cameraDistance = Mathf.Abs(mainCamera.transform.position.z -groundTilemap.transform.position.z);
+        // 카메라와 Tilemap 사이의 Z 거리 구하기
+        float cameraDistance = Mathf.Abs(mainCamera.transform.position.z -buildableTilemap.transform.position.z);
 
         Vector3 screenPoint = new Vector3(screenPosition.x,screenPosition.y,cameraDistance);
 
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(screenPoint);
+        Vector3 worldPosition =mainCamera.ScreenToWorldPoint(screenPoint);
 
-        worldPosition.z = groundTilemap.transform.position.z;
+        worldPosition.z =buildableTilemap.transform.position.z;
 
-        Vector3 buildPosition = SnapBuildPosition(worldPosition);
+        //클릭한곳에 건설 가능한 셀 찾기
+        Vector3Int clickedCell = buildableTilemap.WorldToCell(worldPosition);
 
-        // 옆에 있는 타워와 Y 위치가 비슷하면 같은 줄로 정렬합니다.
-        buildPosition = SnapToNearbyTowerRow(buildPosition);
-
-        // 월드 좌표를 Grid 셀 좌표로 변환
-        Vector3Int cellPosition = groundTilemap.WorldToCell(buildPosition);
-
-        // 건설할 수 없는 위치를 클릭하면 기존 선택 취소
-        if (!CanBuildAtPosition(cellPosition,buildPosition))
+        if (!buildableTilemap.HasTile(clickedCell))
         {
             CancelSelection();
             return;
         }
 
-        SelectedCell = cellPosition;
+        float snappedY = buildableTilemap.GetCellCenterWorld(clickedCell).y;
+
+        float snappedX = Mathf.Round(worldPosition.x / horizontalBuildSpacing) * horizontalBuildSpacing;
+
+        Vector3 buildPosition = new Vector3(snappedX,snappedY,buildableTilemap.transform.position.z);
+
+        Vector3Int buildCell = buildableTilemap.WorldToCell(buildPosition);
+
+        if (!CanBuildAtPosition(buildCell, buildPosition))
+        {
+            CancelSelection();
+            return;
+        }
+
+        SelectedCell = buildCell;
         SelectedWorldPosition = buildPosition;
         HasSelectedCell = true;
 
         if (selectionMarker != null)
         {
-            // 초록색 표시와 실제 타워 위치를 동일하게 맞춥니다.
-            selectionMarker.transform.position = SelectedWorldPosition;
+            selectionMarker.transform.position =SelectedWorldPosition;
+
             selectionMarker.SetActive(true);
         }
-
-        Debug.Log($"건설 타일 선택: {SelectedCell}");
 
         OnCellSelected?.Invoke();
     }
@@ -162,33 +181,26 @@ public class BuildTileSelector : MonoBehaviour
 
     private bool CanBuildAtPosition(Vector3Int cellPosition,Vector3 buildPosition)
     {
-        if (groundTilemap == null || roadTilemap == null)
+        if (buildableTilemap == null)
         {
             return false;
         }
 
-        // 맵 바깥에는 건설할 수 없습니다.
-        if (!groundTilemap.HasTile(cellPosition))
+        // 건설 가능 셀이 아니면 건설 불가능
+        if (!buildableTilemap.HasTile(cellPosition))
         {
             return false;
         }
 
-        // 도로 타일에는 건설할 수 없습니다.
-        if (roadTilemap.HasTile(cellPosition))
-        {
-            return false;
-        }
-
-        // 같은 타일에 이미 타워가 있다면 건설할 수 없습니다.
+        // 같은 셀에 타워가 있다면 건설 불가능
         if (IsOccupied(cellPosition))
         {
             return false;
         }
 
-        // Base, EnemySpawn 등의 건설 방해 오브젝트를 검사합니다.
         if (buildBlockerLayer.value != 0)
         {
-            Collider2D blocker = Physics2D.OverlapBox( buildPosition,blockerCheckSize, 0f,buildBlockerLayer);
+            Collider2D blocker = Physics2D.OverlapBox(buildPosition,blockerCheckSize,0f,buildBlockerLayer);
 
             if (blocker != null)
             {
@@ -196,7 +208,6 @@ public class BuildTileSelector : MonoBehaviour
             }
         }
 
-        //기존 타워와 너무 가까우면 건설안댐
         if (IsTooCloseToPlacedTower(buildPosition))
         {
             return false;
@@ -204,6 +215,7 @@ public class BuildTileSelector : MonoBehaviour
 
         return true;
     }
+
     //선택된 셀이 건설 가능한지 확인
     public bool CanBuildOnSelectedCell()
     {
@@ -266,18 +278,7 @@ public class BuildTileSelector : MonoBehaviour
         {
             OnSelectionCanceled?.Invoke();
         }
-    }
-
-    private Vector3 SnapBuildPosition(Vector3 worldPosition)
-    {
-        worldPosition.x = Mathf.Round(worldPosition.x / buildSnapSize) * buildSnapSize;
-
-        worldPosition.y = Mathf.Round(worldPosition.y / buildSnapSize) * buildSnapSize;
-
-        worldPosition.z = groundTilemap.transform.position.z;
-
-        return worldPosition;
-    }
+    }   
 
     // 기존 타워와 너무 가까운 위치인지 검사합니다.
     private bool IsTooCloseToPlacedTower(Vector3 buildPosition)
@@ -302,31 +303,5 @@ public class BuildTileSelector : MonoBehaviour
         }
 
         return false;
-    }
-
-    // 가까운 기존 타워의 Y 위치에 맞춰 일렬로 정렬합니다.
-    private Vector3 SnapToNearbyTowerRow(Vector3 buildPosition)
-    {
-        float closestDifference = rowSnapTolerance;
-
-        foreach (KeyValuePair<Vector3Int, GameObject> pair in placedTowers)
-        {
-            GameObject tower = pair.Value;
-
-            if (tower == null)
-            {
-                continue;
-            }
-
-            float yDifference = Mathf.Abs(tower.transform.position.y - buildPosition.y);
-
-            if (yDifference <= closestDifference)
-            {
-                buildPosition.y = tower.transform.position.y;
-                closestDifference = yDifference;
-            }
-        }
-
-        return buildPosition;
     }
 }

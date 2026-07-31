@@ -10,9 +10,7 @@ public class LightningTower : TowerAttack
     private const int MaxChainCount = 8;
 
     // 첫 번째 몬스터를 포함한 최대 공격 횟수
-    [SerializeField]
-    [Range(1, MaxChainCount)]
-    private int chainCount = 3;
+    [SerializeField] private int chainCount = 3;
 
     // 다음 몬스터를 찾는 거리
     [SerializeField] private float chainRange = 2.5f;

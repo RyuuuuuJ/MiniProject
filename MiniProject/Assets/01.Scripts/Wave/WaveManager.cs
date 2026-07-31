@@ -67,7 +67,6 @@ public class WaveManager : MonoBehaviour
     {
         if (CurrentState == WaveState.Spawning || CurrentState == WaveState.Fighting)
         {
-            Debug.Log("이미 웨이브가 진행 중입니다.");
             return;
         }
 
@@ -81,7 +80,6 @@ public class WaveManager : MonoBehaviour
 
         if (waves == null || nextWaveIndex >= waves.Length)
         {
-            Debug.Log("더 이상 진행할 웨이브가 없습니다.");
             return;
         }
 
@@ -109,9 +107,6 @@ public class WaveManager : MonoBehaviour
         OnAliveMonsterChanged?.Invoke(aliveMonsterCount);
         OnRemainingMonsterChanged?.Invoke(remainingMonsterCount);
 
-        Debug.Log(
-            $"Wave {CurrentWaveNumber}/{TotalWaveCount} 시작"
-        );
 
         if (!monsterSpawn.StartWave(nextWave))
         {
@@ -189,16 +184,12 @@ public class WaveManager : MonoBehaviour
 
         if (GoldManager.instance != null)
         {
-            GoldManager.instance.AddGold(clearedWave.ClearGoldReward
-            );
+            GoldManager.instance.AddGold(clearedWave.ClearGoldReward);
         }
 
         SetState(WaveState.Cleared);
 
-        Debug.Log(
-            $"Wave {CurrentWaveNumber} Clear! " +
-            $"보상 골드: {clearedWave.ClearGoldReward}"
-        );
+        
 
         bool isLastWave = CurrentWaveNumber >= TotalWaveCount;
 

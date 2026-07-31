@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IceSkill : BulletHitEffect
 {
-    [SerializeField] [Range(0.1f, 1f)] private float slowMultiplier = 0.5f;
+    [SerializeField] private float slowMultiplier = 0.5f;
 
     [SerializeField] private float slowDuration = 2.5f;
 

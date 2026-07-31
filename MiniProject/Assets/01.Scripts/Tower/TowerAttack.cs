@@ -1,5 +1,3 @@
-using System.Net;
-using System.Threading;
 using UnityEngine;
 
 //타워가 공격할 상대와 시간을 결정
@@ -17,9 +15,15 @@ public abstract class TowerAttack : MonoBehaviour
     [SerializeField] float attackInterval = 1f;
     [SerializeField] protected int attackDamage = 10;
     [SerializeField] LayerMask enemyLayer;
-
+    // 타워별 공격 효과음 종류
+    [SerializeField] private TowerSoundType attackSoundType;
     //공격 간격
     private float attackTimer;
+
+    //능력치 읽기
+    public int AttackDamage => attackDamage;
+    public float AttackInterval => attackInterval;
+    public float AttackRange => attackRange;
 
     private readonly Collider2D[] detectionBuffer = new Collider2D[DetectionBufferSize];
 
@@ -29,6 +33,7 @@ public abstract class TowerAttack : MonoBehaviour
 
     protected ContactFilter2D EnemyFilter => enemyFilter;
     protected MonsterHp CurrentTarget { get; private set; }
+
     protected virtual void Awake()
     {
         enemyFilter = new ContactFilter2D();
@@ -70,7 +75,13 @@ public abstract class TowerAttack : MonoBehaviour
         }
       
         Attack(CurrentTarget);
-       
+
+        //공격 시 효과음 재생
+        if (PlaySound.instance != null)
+        {
+            PlaySound.instance.PlayTowerAttack(attackSoundType);
+        }
+
         attackTimer = attackInterval;
 
     }
@@ -122,5 +133,20 @@ public abstract class TowerAttack : MonoBehaviour
         // Scene 창에서 선택한 타워의 공격 범위를 확인합니다.
         Gizmos.color = new Color(1f, 0.35f, 0.1f, 1f);
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    //업그레이드 적용
+    public void ApplyUpgradeData(TowerUpgradeData upgradeData)
+    {
+        if (upgradeData == null)
+        {
+            return;
+        }
+
+        attackDamage = Mathf.Max(0, upgradeData.AttackDamage);
+        attackInterval = Mathf.Max(0.05f, upgradeData.AttackInterval);
+        attackRange = Mathf.Max(0.1f, upgradeData.AttackRange);
+
+        attackTimer = Mathf.Min(attackTimer, attackInterval);
     }
 }

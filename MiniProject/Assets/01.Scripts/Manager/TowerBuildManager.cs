@@ -113,8 +113,19 @@ public class TowerBuildManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{towerData.TowerName} 건설 완료 / 비용: {towerData.BuildCost}"
-        );
+        // 건설된 타워에 데이터와 건설 위치 전달
+        if (tower.TryGetComponent(out TowerInfo towerInfo))
+        {
+            towerInfo.Initialize(towerData, buildCell, tileSelector);
+        }
+        else
+        {
+            Debug.LogWarning( $"{towerData.TowerName} 프리팹에 TowerInfo가 없습니다.");
+        }
+
+        PlaySound.instance?.PlayTowerBuild();
+
+
     }
 
 

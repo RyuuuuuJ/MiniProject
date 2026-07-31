@@ -13,6 +13,22 @@ MonoBehaviour:
   m_Name: IceTowerData
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: IceTower
-  towerIcon: {fileID: 21300000, guid: 390f357948f219648841c77208725650, type: 3}
+  towerIcon: {fileID: -7293865252765696589, guid: 390f357948f219648841c77208725650, type: 3}
   towerPrefab: {fileID: 1802535633831089213, guid: 07fae2d5da5565546b835c4323d92a45, type: 3}
   buildCost: 150
+  levelData:
+  - upgradeCost: 0
+    attackDamage: 8
+    attackInterval: 0.9
+    attackRange: 3.2
+    towerSprite: {fileID: -7293865252765696589, guid: 390f357948f219648841c77208725650, type: 3}
+  - upgradeCost: 220
+    attackDamage: 10
+    attackInterval: 0.8
+    attackRange: 3.4
+    towerSprite: {fileID: -5666584083743376562, guid: 2d183f73642652244a8bbaaeac03a336, type: 3}
+  - upgradeCost: 320
+    attackDamage: 13
+    attackInterval: 0.7
+    attackRange: 3.6
+    towerSprite: {fileID: -3523601739617412793, guid: f1bf8fb4a3d1d5b4fb020357cb8709cd, type: 3}
